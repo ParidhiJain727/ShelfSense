@@ -6,6 +6,7 @@ Entry point. Run: streamlit run app.py
 import streamlit as st
 from shelfsense import process_query
 from shelfsense.database import init_db, get_open_alerts, resolve_alert, get_all_inventory
+from shelfsense.agents.alert_watch import run as refresh_alerts
 from data.seed_inventory import seed
 
 # ── Page config ───────────────────────────────────────────────────────────────
@@ -156,6 +157,7 @@ with st.sidebar:
 
     # ── Live Alert Panel ──────────────────────────────────────────────────────
     st.markdown("#### 🔔 Live Alerts")
+    refresh_alerts()
     alerts = get_open_alerts()
 
     if alerts:
